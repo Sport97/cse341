@@ -1,0 +1,35 @@
+.rajdhani-light {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.rajdhani-regular {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.rajdhani-medium {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.rajdhani-semibold {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.rajdhani-bold {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+* {
+  font-family: "Rajdhani", Helvetica, sans-serif;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.1em;
+  background-color: black;
+  color: #91b8d4;
+  justify-self: center;
+}
