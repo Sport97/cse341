@@ -1,7 +1,7 @@
 const indexController = {};
 
 indexController.buildIndex = async function (req, res) {
-  res.render("index", { title: "Home" });
+  res.send("Luke Port");
 };
 
 module.exports = indexController;
