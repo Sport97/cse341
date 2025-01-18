@@ -1,8 +1,8 @@
 const mongodb = require("../database/connect");
 const contactController = {};
-const contactData = require("../contacts.json");
 const { ObjectId } = require("mongodb");
 
+// const contactData = require("../contacts.json");
 // contactController.getContacts = async (req, res) => {
 //   try {
 //     return res.status(200).json(contactData);
