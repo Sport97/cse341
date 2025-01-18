@@ -9,20 +9,26 @@ const initDb = (callback) => {
     console.log("Database is already initialized!");
     return callback(null, _db);
   }
-  MongoClient.connect(process.env.MONGODB_URI)
+
+  const uri = process.env.MONGODB_URI;
+
+  MongoClient.connect(uri, {
+    ssl: true,
+  })
     .then((client) => {
       _db = client.db("cse");
-      console.log("Using collection from cse");
+      console.log("Connected to the 'cse' database.");
       callback(null, _db);
     })
     .catch((err) => {
+      console.error("Error connecting to the database:", err);
       callback(err);
     });
 };
 
 const getDb = () => {
   if (!_db) {
-    throw Error("Database not initialized");
+    throw new Error("Database not initialized");
   }
   return _db;
 };
