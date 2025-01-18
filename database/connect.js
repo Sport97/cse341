@@ -14,6 +14,7 @@ const initDb = (callback) => {
 
   MongoClient.connect(uri, {
     ssl: true,
+    tls: true,
   })
     .then((client) => {
       _db = client.db("cse");
