@@ -85,7 +85,8 @@ contactsController.updateContact = async (req, res) => {
       .replaceOne({ _id: new ObjectId(id) }, contactInfo);
 
     if (result.modifiedCount > 0) {
-      res.status(200).json({ ...result, upsertedId: id, message: "Contact updated successfully." });
+      res.status(204).send();
+      console.log({ upsertedId: id, message: "Contact updated successfully." });
     }
   } catch (error) {
     console.error("Error updating contact:", error);
