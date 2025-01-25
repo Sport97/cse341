@@ -59,13 +59,16 @@ contactsController.createContact = async (req, res) => {
     const result = await db.collection("contacts").insertOne(contactInfo);
 
     if (result.acknowledged) {
-      res
-        .status(201)
-        .json({ ...contactInfo, _id: result.insertedId, message: "Contact created successfully." });
+      res.status(201).json({
+        ...contactInfo,
+        _id: result.insertedId,
+        message: "New contact created successfully."
+      });
+      console.log({ result, message: "New contact created successfully." });
     }
   } catch (error) {
     console.error("Error making new contact:", error);
-    res.status(500).json({ error: "Failed to create contact" });
+    res.status(500).json({ error: "Failed to create contact." });
   }
 };
 
@@ -86,11 +89,11 @@ contactsController.updateContact = async (req, res) => {
 
     if (result.modifiedCount > 0) {
       res.status(204).send();
-      console.log({ upsertedId: id, message: "Contact updated successfully." });
+      console.log({ upsertedId: id, message: "Updated contact information." });
     }
   } catch (error) {
     console.error("Error updating contact:", error);
-    res.status(500).json({ error: "Failed to update contact" });
+    res.status(500).json({ error: "Failed to update contact." });
   }
 };
 
@@ -101,11 +104,12 @@ contactsController.deleteContact = async (req, res) => {
     const result = await db.collection("contacts").deleteOne({ _id: new ObjectId(id) });
 
     if (result.deletedCount > 0) {
-      res.status(200).json({ ...result, deletedId: id, message: "Contact removed" });
+      res.status(200).json({ ...result, deletedId: id, message: "Contact removed." });
+      console.log({ result, deletedId: id, message: "Contact removed." });
     }
   } catch (error) {
     console.error("Error deleting contact:", error);
-    res.status(500).json({ error: "Failed to delete contact" });
+    res.status(500).json({ error: "Failed to delete contact." });
   }
 };
 
