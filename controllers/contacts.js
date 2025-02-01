@@ -14,8 +14,7 @@ const { ObjectId } = require("mongodb");
 
 contactsController.getContacts = async (req, res) => {
   try {
-    const db = mongodb.getDb();
-    const result = await db.collection("contacts").find().toArray();
+    const result = await mongodb.getDb().db.collection("contacts").find().toArray();
 
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(result);
@@ -28,8 +27,10 @@ contactsController.getContacts = async (req, res) => {
 contactsController.getContactByID = async (req, res) => {
   try {
     const id = req.params.id;
-    const db = mongodb.getDb();
-    const result = await db.collection("contacts").findOne({ _id: new ObjectId(id) });
+    const result = await mongodb
+      .getDb()
+      .db.collection("contacts")
+      .findOne({ _id: new ObjectId(id) });
 
     if (!ObjectId.isValid(id)) {
       return res.status(400).json({ error: "Invalid ID format" });
@@ -55,10 +56,10 @@ contactsController.createContact = async (req, res) => {
       favoriteColor: req.body.favoriteColor,
       birthday: req.body.birthday
     };
-    const db = mongodb.getDb();
-    const result = await db.collection("contacts").insertOne(contactInfo);
+    const result = await mongodb.getDb().db.collection("contacts").insertOne(contactInfo);
 
     if (result.acknowledged) {
+      res.setHeader("Content-Type", "application/json");
       res.status(201).json({
         ...contactInfo,
         _id: result.insertedId,
@@ -82,12 +83,13 @@ contactsController.updateContact = async (req, res) => {
       favoriteColor: req.body.favoriteColor,
       birthday: req.body.birthday
     };
-    const db = mongodb.getDb();
-    const result = await db
-      .collection("contacts")
+    const result = await mongodb
+      .getDb()
+      .db.collection("contacts")
       .replaceOne({ _id: new ObjectId(id) }, contactInfo);
 
     if (result.modifiedCount > 0) {
+      res.setHeader("Content-Type", "application/json");
       res.status(204).send();
       console.log({ upsertedId: id, message: "Updated contact information." });
     }
@@ -100,10 +102,13 @@ contactsController.updateContact = async (req, res) => {
 contactsController.deleteContact = async (req, res) => {
   try {
     const id = req.params.id;
-    const db = mongodb.getDb();
-    const result = await db.collection("contacts").deleteOne({ _id: new ObjectId(id) });
+    const result = await mongodb
+      .getDb()
+      .db.collection("contacts")
+      .deleteOne({ _id: new ObjectId(id) });
 
     if (result.deletedCount > 0) {
+      res.setHeader("Content-Type", "application/json");
       res.status(200).json({ ...result, deletedId: id, message: "Contact removed." });
       console.log({ result, deletedId: id, message: "Contact removed." });
     }
