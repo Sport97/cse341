@@ -32,19 +32,14 @@
     "/contacts/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
       "post": {
         "description": "",
-        "produces": ["application/json"],
         "parameters": [
           {
             "name": "body",
@@ -65,18 +60,15 @@
                   "example": "any"
                 },
                 "birthday": {
-                  "example": "any"
+                  "example": "YYYY-MM-DD"
                 }
               }
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -84,7 +76,6 @@
     "/contacts/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -94,23 +85,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       },
       "put": {
         "description": "",
-        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -137,24 +118,20 @@
                   "example": "any"
                 },
                 "birthday": {
-                  "example": "any"
+                  "example": "YYYY-MM-DD"
                 }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "delete": {
         "description": "",
-        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -164,11 +141,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }

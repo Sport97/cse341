@@ -28,12 +28,12 @@ contactsController.getContacts = async (req, res) => {
 contactsController.getContactByID = async (req, res) => {
   try {
     const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid ID" });
+    }
     const db = mongodb.getDb();
     const result = await db.collection("contacts").findOne({ _id: new ObjectId(id) });
 
-    if (!ObjectId.isValid(id)) {
-      return res.status(400).json({ error: "Invalid ID format" });
-    }
     if (!result) {
       return res.status(404).json({ message: "Contact not found" });
     }
@@ -75,6 +75,9 @@ contactsController.createContact = async (req, res) => {
 contactsController.updateContact = async (req, res) => {
   try {
     const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid ID" });
+    }
     const contactInfo = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -100,6 +103,9 @@ contactsController.updateContact = async (req, res) => {
 contactsController.deleteContact = async (req, res) => {
   try {
     const id = req.params.id;
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid ID" });
+    }
     const db = mongodb.getDb();
     const result = await db.collection("contacts").deleteOne({ _id: new ObjectId(id) });
 
